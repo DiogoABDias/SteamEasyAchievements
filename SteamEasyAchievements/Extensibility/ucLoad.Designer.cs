@@ -1,4 +1,4 @@
-﻿namespace SteamDlcShopping.Extensibility
+﻿namespace SteamEasyAchievements.Extensibility
 {
     partial class ucLoad
     {

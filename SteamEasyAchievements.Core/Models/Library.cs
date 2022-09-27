@@ -55,7 +55,7 @@ namespace SteamEasyAchievements.Core.Models
             Games = JsonConvert.DeserializeObject<List<Game>>($"{jObject["response"]?["games"]}");
         }
 
-        internal void LoadGamesAchievements()
+        internal void LoadGamesAchievements(string sessionId, string steamLoginSecure)
         {
             if (Games is null)
             {
@@ -84,7 +84,7 @@ namespace SteamEasyAchievements.Core.Models
                             break;
                         }
 
-                        Games[index.Value].LoadAchievements();
+                        Games[index.Value].LoadAchievements(sessionId, steamLoginSecure);
                     }
 
                     countdownEvent.Signal();
@@ -92,6 +92,8 @@ namespace SteamEasyAchievements.Core.Models
             }
 
             countdownEvent.Wait();
+
+            Games.RemoveAll(x => x.Achievements is null || x.Achievements.Count == 0);
         }
     }
 }

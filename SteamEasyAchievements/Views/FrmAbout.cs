@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace SteamDlcShopping.Views
+namespace SteamEasyAchievements.Views
 {
     public partial class FrmAbout : Form
     {
@@ -18,7 +18,7 @@ namespace SteamDlcShopping.Views
                     CreateNoWindow = true,
                     UseShellExecute = false,
                     FileName = "cmd.exe",
-                    Arguments = "/c start https://github.com/DiogoABDias/SteamDlcShopping"
+                    Arguments = "/c start https://github.com/DiogoABDias/SteamEasyAchievements"
                 }
             };
 

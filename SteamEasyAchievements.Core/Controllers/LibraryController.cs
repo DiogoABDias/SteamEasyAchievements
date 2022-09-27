@@ -1,4 +1,5 @@
 ﻿using SteamEasyAchievements.Core.Models;
+using SteamEasyAchievements.Core.ViewModels;
 
 namespace SteamEasyAchievements.Core.Controllers
 {
@@ -91,7 +92,7 @@ namespace SteamEasyAchievements.Core.Controllers
                 _library.LoadDynamicStore(sessionId, steamLoginSecure);
                 _library.LoadGames(steamApiKey);
 
-                _library.LoadGamesAchievements();
+                _library.LoadGamesAchievements(sessionId, steamLoginSecure);
 
                 if (_library.Games is null)
                 {
@@ -103,7 +104,7 @@ namespace SteamEasyAchievements.Core.Controllers
                 foreach (Game game in _library.Games)
                 {
                     //Mark to remove games without dlc
-                    if (game.AchievementList is null || game.AchievementList.Count == 0)
+                    if (game.Achievements is null || game.Achievements.Count == 0)
                     {
                         gamesToRemove.Add(game.AppId);
                         continue;
@@ -114,6 +115,48 @@ namespace SteamEasyAchievements.Core.Controllers
             {
                 Log.Fatal(exception);
             }
+        }
+
+        public static List<AchievementView> GetAchievements()
+        {
+            List<AchievementView> result = new();
+
+            if (_library is null)
+            {
+                return result;
+            }
+
+            if (_library.Games is null)
+            {
+                return result;
+            }
+
+            try
+            {
+                foreach (Game game in _library.Games)
+                {
+                    foreach (Achievement achievement in game.Achievements)
+                    {
+                        AchievementView achievementDto = new()
+                        {
+                            Name = achievement.Name,
+                            Description = achievement.Description,
+                            Percentage = achievement.Percentage,
+                            AppId = game.AppId
+                        };
+
+                        result.Add(achievementDto);
+                    }
+                }
+            }
+            catch (Exception exception)
+            {
+                Log.Fatal(exception);
+            }
+
+            result = result.OrderByDescending(x => x.Percentage).ToList();
+
+            return result;
         }
 
         internal static string GetGameName(int appId)

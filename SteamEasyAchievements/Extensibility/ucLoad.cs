@@ -1,4 +1,6 @@
-﻿namespace SteamDlcShopping.Extensibility
+﻿using SteamEasyAchievements.Properties;
+
+namespace SteamEasyAchievements.Extensibility
 {
     public partial class ucLoad : UserControl
     {
@@ -14,6 +16,7 @@
 
             ptbLoading.Left = (ClientSize.Width - ptbLoading.Width) / 2;
             ptbLoading.Top = (ClientSize.Height - ptbLoading.Height) / 2;
+            //ptbLoading.Image = Resources.defaultLoading;
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using SteamEasyAchievements.Properties;
 using System.Diagnostics;
 
-namespace SteamDlcShopping.Views
+namespace SteamEasyAchievements.Views
 {
     public partial class FrmSettings : Form
     {

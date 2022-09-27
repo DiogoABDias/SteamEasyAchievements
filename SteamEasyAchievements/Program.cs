@@ -1,6 +1,5 @@
-using SteamDlcShopping.Views;
 using SteamEasyAchievements.Properties;
-using Views;
+using SteamEasyAchievements.Views;
 
 namespace SteamEasyAchievements
 {

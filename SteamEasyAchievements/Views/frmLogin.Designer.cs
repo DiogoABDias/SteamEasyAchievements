@@ -1,4 +1,4 @@
-﻿namespace SteamDlcShopping.Views
+﻿namespace SteamEasyAchievements.Views
 {
     partial class FrmLogin
     {
@@ -40,7 +40,7 @@
             this.webLogin.Location = new System.Drawing.Point(0, 0);
             this.webLogin.Name = "webLogin";
             this.webLogin.Size = new System.Drawing.Size(784, 495);
-            this.webLogin.Source = new System.Uri("https://store.steampowered.com/login", System.UriKind.Absolute);
+            this.webLogin.Source = new System.Uri("https://steamcommunity.com/login/home", System.UriKind.Absolute);
             this.webLogin.TabIndex = 0;
             this.webLogin.Visible = false;
             this.webLogin.ZoomFactor = 1D;

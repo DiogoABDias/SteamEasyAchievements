@@ -1,11 +1,10 @@
-﻿using SteamDlcShopping.Extensibility;
-using SteamDlcShopping.Views;
-using SteamEasyAchievements.Core.Controllers;
+﻿using SteamEasyAchievements.Core.Controllers;
 using SteamEasyAchievements.Core.ViewModels;
+using SteamEasyAchievements.Extensibility;
 using SteamEasyAchievements.Properties;
 using Timer = System.Threading.Timer;
 
-namespace Views
+namespace SteamEasyAchievements.Views
 {
     public partial class FrmMain : Form
     {
@@ -47,7 +46,7 @@ namespace Views
                 ucCalculate ucCalculate = new()
                 {
                     Name = "ucCalculate",
-                    //Location = grbLibrary.Location
+                    Location = lsvAchievements.Location
                 };
 
                 Controls.Add(ucCalculate);
@@ -115,27 +114,45 @@ namespace Views
             Timer tmrLibrary = new(_ => tmrLibrary_Tick(), null, 0, Timeout.Infinite);
         }
 
-        //////////////////////////////////////// GAME LIST ////////////////////////////////////////
+        //////////////////////////////////////// ACHIEVEMENT LIST ////////////////////////////////////////
 
         private void LoadGames()
         {
-            //LibraryView library = LibraryController.GetGames();
+            List<AchievementView> dlcList = LibraryController.GetAchievements();
 
-            //if (library.Games is null)
-            //{
-            //    return;
-            //}
+            lsvAchievements_Load(dlcList);
 
-            //lsvGame_Load(library.Games);
-            //lsvGame.Sort();
+            lsvAchievements.Enabled = true;
 
-            //lsvGame.Enabled = true;
-            //txtGameSearch.Enabled = true;
-            //chkHideGamesNotOnSale.Enabled = true;
+            lblAchievementCount.Text = $"Count: {lsvAchievements.Items.Count}";
+        }
 
-            //lblGameCount.Text = $"Count: {lsvGame.Items.Count}";
-            //lblLibraryCost.Text = $"Cost: {library.TotalCost}";
-            //btnBlacklist.Visible = false;
+        private void lsvAchievements_Load(List<AchievementView> achievements)
+        {
+            lsvAchievements.Items.Clear();
+
+            lsvAchievements.BeginUpdate();
+
+            foreach (AchievementView achievement in achievements)
+            {
+                ListViewItem item;
+                ListViewItem.ListViewSubItem subItem;
+
+                //Percentage
+                item = new() { Tag = achievement.AppId, Text = $"{achievement.Percentage}%" };
+
+                //Game
+                subItem = new() { Text = achievement.AppId.ToString() };
+                item.SubItems.Add(subItem);
+
+                //Name
+                subItem = new() { Text = achievement.Name };
+                item.SubItems.Add(subItem);
+
+                lsvAchievements.Items.Add(item);
+            }
+
+            lsvAchievements.EndUpdate();
         }
 
         //////////////////////////////////////// METHODS ////////////////////////////////////////

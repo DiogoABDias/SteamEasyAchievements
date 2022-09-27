@@ -1,4 +1,4 @@
-﻿namespace SteamDlcShopping.Views
+﻿namespace SteamEasyAchievements.Views
 {
     partial class FrmSettings
     {

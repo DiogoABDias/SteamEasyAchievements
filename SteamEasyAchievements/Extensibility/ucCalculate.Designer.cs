@@ -1,6 +1,6 @@
 ﻿using SteamEasyAchievements.Properties;
 
-namespace SteamDlcShopping.Extensibility
+namespace SteamEasyAchievements.Extensibility
 {
     partial class ucCalculate
     {
@@ -36,7 +36,6 @@ namespace SteamDlcShopping.Extensibility
             // 
             // ptbLoading
             // 
-            this.ptbLoading.Image = Resources.defaultLoading;
             this.ptbLoading.Location = new System.Drawing.Point(240, 230);
             this.ptbLoading.Name = "ptbLoading";
             this.ptbLoading.Size = new System.Drawing.Size(287, 182);
